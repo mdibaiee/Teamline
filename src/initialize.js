@@ -4,14 +4,14 @@ import _ from 'lodash';
 import Promise from 'bluebird';
 import relations from './relations';
 
-export default async config => {
+export default async (config = {}) => {
 	// Config
 	config = {
 		database: {
 			user: 'root',
 			dialect: 'mysql',
-			database: 'bolt_task_tracker',
-			models: 'build/models/**/*.js',
+			database: 'teamline',
+			models: path.relative(process.cwd(), path.join(__dirname, './models/**/*.js')),
 
 			...config.database
 		},
@@ -22,12 +22,21 @@ export default async config => {
 
 			...config.server
 		},
+
+		crud: {
+			...config.crud
+		}
 	};
 
 	// Create connection
-	let server = new Hapi.Server();
+	let server = new Hapi.Server({
+		connections: {
+			router: {
+				stripTrailingSlash: true
+			}
+		}
+	});
 	server.connection(config.server);
-
 
 	// Register plugins
 	try {
@@ -37,9 +46,6 @@ export default async config => {
 			register: require('good'),
 			options: {
 				reporters: [{
-					reporter: require('good-console'),
-					events: { ops: '*', response: '*', error: '*', request: '*' }
-				}, {
 					reporter: require('good-file'),
 					config: path.join(__dirname, '../../hapi.log'),
 					events: { ops: '*', response: '*', error: '*', request: '*' }
@@ -51,17 +57,22 @@ export default async config => {
 			register: require('hapi-sequelize'),
 			options: config.database
 		});
+
+		let db = server.plugins['hapi-sequelize'].db;
+		let models = db.sequelize.models;
+
+		relations(models)
+
+		await register({
+			register: require('hapi-sequelize-crud'),
+			options: config.crud
+		});
 	} catch(error) {
 		return console.error('Error registering plugins!', error);
 	}
 
 	let db = server.plugins['hapi-sequelize'].db;
 	let models = db.sequelize.models;
-
-	let { Employee, Role, Team, Company, OKR, Action } = models;
-	relations(models)
-
-
 	db.sequelize.sync();
 
 	server.ext('onPreHandler', function(modelCollections) {
