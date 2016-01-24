@@ -1,15 +1,16 @@
-import 'babel-polyfill';
 import initialize from './initialize';
-import routes from './routes';
 import config from '../config';
 
-async function start(config) {
+async function start(config = {}) {
 	let server = await initialize(config);
-	routes(server);
 
-	server.start(() => {
-		console.log(`Task tracker server running at: ${server.info.uri}`);
-	});
+	return new Promise((resolve, reject) => {
+		server.start(() => {
+			console.log(`Task tracker server running at: ${server.info.uri}`);
+
+			resolve(server);
+		});
+	})
 }
 
 if (Object.keys(config).length) start(config);
