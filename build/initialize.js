@@ -30,8 +30,11 @@ var _relations = require('./relations');
 
 var _relations2 = _interopRequireDefault(_relations);
 
-exports['default'] = function callee$0$0(config) {
-	var server, register, db, models, Employee, Role, Team, Company, OKR, Action;
+exports['default'] = function callee$0$0() {
+	var config = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+	var server, register, _db, _models, db, models;
+
 	return regeneratorRuntime.async(function callee$0$0$(context$1$0) {
 		while (1) switch (context$1$0.prev = context$1$0.next) {
 			case 0:
@@ -40,8 +43,8 @@ exports['default'] = function callee$0$0(config) {
 					database: _extends({
 						user: 'root',
 						dialect: 'mysql',
-						database: 'bolt_task_tracker',
-						models: 'build/models/**/*.js'
+						database: 'teamline',
+						models: _path2['default'].relative(process.cwd(), _path2['default'].join(__dirname, './models/**/*.js'))
 
 					}, config.database),
 
@@ -49,11 +52,19 @@ exports['default'] = function callee$0$0(config) {
 						host: '127.0.0.1',
 						port: 8080
 
-					}, config.server)
+					}, config.server),
+
+					crud: _extends({}, config.crud)
 				};
 
 				// Create connection
-				server = new _hapi2['default'].Server();
+				server = new _hapi2['default'].Server({
+					connections: {
+						router: {
+							stripTrailingSlash: true
+						}
+					}
+				});
 
 				server.connection(config.server);
 
@@ -65,9 +76,6 @@ exports['default'] = function callee$0$0(config) {
 					register: require('good'),
 					options: {
 						reporters: [{
-							reporter: require('good-console'),
-							events: { ops: '*', response: '*', error: '*', request: '*' }
-						}, {
 							reporter: require('good-file'),
 							config: _path2['default'].join(__dirname, '../../hapi.log'),
 							events: { ops: '*', response: '*', error: '*', request: '*' }
@@ -83,25 +91,29 @@ exports['default'] = function callee$0$0(config) {
 				}));
 
 			case 9:
+				_db = server.plugins['hapi-sequelize'].db;
+				_models = _db.sequelize.models;
+
+				(0, _relations2['default'])(_models);
+
 				context$1$0.next = 14;
+				return regeneratorRuntime.awrap(register({
+					register: require('hapi-sequelize-crud'),
+					options: config.crud
+				}));
+
+			case 14:
+				context$1$0.next = 19;
 				break;
 
-			case 11:
-				context$1$0.prev = 11;
+			case 16:
+				context$1$0.prev = 16;
 				context$1$0.t0 = context$1$0['catch'](3);
 				return context$1$0.abrupt('return', console.error('Error registering plugins!', context$1$0.t0));
 
-			case 14:
+			case 19:
 				db = server.plugins['hapi-sequelize'].db;
 				models = db.sequelize.models;
-				Employee = models.Employee;
-				Role = models.Role;
-				Team = models.Team;
-				Company = models.Company;
-				OKR = models.OKR;
-				Action = models.Action;
-
-				(0, _relations2['default'])(models);
 
 				db.sequelize.sync();
 
@@ -114,11 +126,11 @@ exports['default'] = function callee$0$0(config) {
 
 				return context$1$0.abrupt('return', server);
 
-			case 26:
+			case 24:
 			case 'end':
 				return context$1$0.stop();
 		}
-	}, null, _this, [[3, 11]]);
+	}, null, _this, [[3, 16]]);
 };
 
 module.exports = exports['default'];

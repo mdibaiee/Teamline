@@ -6,21 +6,16 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-require('babel-polyfill');
-
 var _initialize = require('./initialize');
 
 var _initialize2 = _interopRequireDefault(_initialize);
-
-var _routes = require('./routes');
-
-var _routes2 = _interopRequireDefault(_routes);
 
 var _config = require('../config');
 
 var _config2 = _interopRequireDefault(_config);
 
-function start(config) {
+function start() {
+	var config = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 	var server;
 	return regeneratorRuntime.async(function start$(context$1$0) {
 		while (1) switch (context$1$0.prev = context$1$0.next) {
@@ -30,14 +25,15 @@ function start(config) {
 
 			case 2:
 				server = context$1$0.sent;
+				return context$1$0.abrupt('return', new Promise(function (resolve, reject) {
+					server.start(function () {
+						console.log('Task tracker server running at: ' + server.info.uri);
 
-				(0, _routes2['default'])(server);
+						resolve(server);
+					});
+				}));
 
-				server.start(function () {
-					console.log('Task tracker server running at: ' + server.info.uri);
-				});
-
-			case 5:
+			case 4:
 			case 'end':
 				return context$1$0.stop();
 		}

@@ -27,10 +27,7 @@ module.exports = function (sequelize, Types) {
     birthday: Types.DATE,
     joinDate: Types.DATE,
     phone: {
-      type: Types.STRING,
-      validate: {
-        isNumeric: true
-      }
+      type: Types.STRING
     },
     github: {
       type: Types.STRING,
