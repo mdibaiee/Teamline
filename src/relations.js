@@ -44,9 +44,9 @@ export default ({ Company, Employee, Role, Team, OKR, Project, Action, Goal, Vac
   Team.hasMany(Goal);
   Goal.belongsTo(Team);
 
-  // Role --> Project
-  Role.hasMany(Project);
-  Project.belongsTo(Role);
+  // Project --> Role
+  Project.hasMany(Role);
+  Role.belongsTo(Project);
 
   // Employee --> Action
   Employee.hasMany(Action);
