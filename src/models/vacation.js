@@ -1,5 +1,5 @@
-module.exports = (sequelize, Types) => {
-  return sequelize.define('Vacation', {
+module.exports = (sequelize, Types) =>
+  sequelize.define('Vacation', {
     from: {
       type: Types.DATE,
       defaultValue: Types.NOW
@@ -26,5 +26,4 @@ module.exports = (sequelize, Types) => {
         }
       }
     }
-  })
-}
+  });

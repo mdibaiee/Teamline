@@ -1,5 +1,5 @@
-module.exports = (sequelize, Types) => {
-  return sequelize.define('Goal', {
+module.exports = (sequelize, Types) =>
+  sequelize.define('Goal', {
     name: {
       type: Types.STRING,
       allowNull: false
@@ -45,5 +45,4 @@ module.exports = (sequelize, Types) => {
         }
       }
     }
-  })
-}
+  });
