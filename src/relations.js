@@ -51,4 +51,4 @@ export default ({ Company, Employee, Role, Team, OKR, Project, Action, Goal, Vac
   // Employee --> Action
   Employee.hasMany(Action);
   Action.belongsTo(Employee);
-}
+};

@@ -1,16 +1,19 @@
 import initialize from './initialize';
 import config from '../config';
+import sync from './sync';
 
-async function start(config = {}) {
-	let server = await initialize(config);
+async function start(cfg = {}) {
+  const server = await initialize(cfg);
 
-	return new Promise((resolve, reject) => {
-		server.start(() => {
-			console.log(`Task tracker server running at: ${server.info.uri}`);
+  return new Promise(resolve => {
+    server.start(() => {
+      console.log(`Task tracker server running at: ${server.info.uri}`);
 
-			resolve(server);
-		});
-	})
+      sync(server.plugins['hapi-sequelize'].db, cfg);
+
+      resolve(server);
+    });
+  });
 }
 
 if (Object.keys(config).length) start(config);

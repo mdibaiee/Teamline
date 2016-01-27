@@ -1,5 +1,5 @@
-module.exports = function(sequelize, Types) {
-  return sequelize.define('Employee', {
+module.exports = (sequelize, Types) =>
+  sequelize.define('Employee', {
     firstname: {
       type: Types.STRING,
       allowNull: false
@@ -64,4 +64,3 @@ module.exports = function(sequelize, Types) {
       }
     }
   });
-}
