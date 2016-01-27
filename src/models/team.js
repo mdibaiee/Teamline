@@ -1,8 +1,7 @@
-module.exports = (sequelize, Types) => {
-  return sequelize.define('Team', {
+module.exports = (sequelize, Types) =>
+  sequelize.define('Team', {
     name: {
       type: Types.STRING,
       allowNull: false
     }
-  })
-}
+  });

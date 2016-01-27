@@ -1,5 +1,5 @@
-module.exports = (sequelize, Types) => {
-  return sequelize.define('Action', {
+module.exports = (sequelize, Types) =>
+  sequelize.define('Action', {
     name: {
       type: Types.STRING,
       allowNull: false
@@ -31,7 +31,9 @@ module.exports = (sequelize, Types) => {
         where: {
           date: {
             $gt: sequelize.fn('CURDATE'),
-            $lt: sequelize.fn('DATE_ADD', sequelize.fn('CURDATE'), sequelize.literal('INTERVAL 1 DAY'))
+            $lt: sequelize.fn('DATE_ADD',
+                              sequelize.fn('CURDATE'),
+                              sequelize.literal('INTERVAL 1 DAY'))
           }
         }
       },
@@ -45,10 +47,11 @@ module.exports = (sequelize, Types) => {
       future: {
         where: {
           date: {
-            $gt: sequelize.fn('DATE_ADD', sequelize.fn('CURDATE'), sequelize.literal('INTERVAL 1 DAY'))
+            $gt: sequelize.fn('DATE_ADD',
+                              sequelize.fn('CURDATE'),
+                              sequelize.literal('INTERVAL 1 DAY'))
           }
         }
       }
     }
-  })
-}
+  });

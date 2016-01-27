@@ -1,5 +1,5 @@
-module.exports = (sequelize, Types) => {
-  return sequelize.define('OKR', {
+module.exports = (sequelize, Types) =>
+  sequelize.define('OKR', {
     name: {
       type: Types.STRING,
       allowNull: false
@@ -28,5 +28,4 @@ module.exports = (sequelize, Types) => {
         }
       }
     }
-  })
-}
+  });
