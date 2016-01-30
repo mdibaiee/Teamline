@@ -14,6 +14,7 @@ exports['default'] = function (_ref) {
   var Action = _ref.Action;
   var Goal = _ref.Goal;
   var Vacation = _ref.Vacation;
+  var WorkHour = _ref.WorkHour;
 
   // Employee <--> Role
   Employee.belongsToMany(Role, { through: 'EmployeeRoles' });
@@ -67,6 +68,10 @@ exports['default'] = function (_ref) {
   // Employee --> Action
   Employee.hasMany(Action);
   Action.belongsTo(Employee);
+
+  // Employee --> WorkHour
+  Employee.hasMany(WorkHour);
+  WorkHour.belongsTo(Employee);
 };
 
 module.exports = exports['default'];
