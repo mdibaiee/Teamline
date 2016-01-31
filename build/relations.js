@@ -13,7 +13,7 @@ exports['default'] = function (_ref) {
   var Project = _ref.Project;
   var Action = _ref.Action;
   var Goal = _ref.Goal;
-  var Vacation = _ref.Vacation;
+  var Recess = _ref.Recess;
   var WorkHour = _ref.WorkHour;
 
   // Employee <--> Role
@@ -24,9 +24,9 @@ exports['default'] = function (_ref) {
   Employee.belongsToMany(Team, { through: 'EmployeeTeams' });
   Team.belongsToMany(Employee, { through: 'EmployeeTeams' });
 
-  // Employee --> Vacation
-  Employee.hasMany(Vacation);
-  Vacation.belongsTo(Employee);
+  // Employee --> Recess
+  Employee.hasMany(Recess);
+  Recess.belongsTo(Employee);
 
   // Team --> Role
   Team.hasMany(Role);
