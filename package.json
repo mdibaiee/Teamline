@@ -42,7 +42,7 @@
     "good-file": "5.1.1",
     "hapi": "12.1.0",
     "hapi-sequelize": "2.2.4",
-    "hapi-sequelize-crud": "1.4.0",
+    "hapi-sequelize-crud": "1.5.0",
     "lodash": "4.0.0",
     "moment": "2.11.1",
     "mysql": "2.10.2",
