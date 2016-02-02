@@ -3,5 +3,11 @@ module.exports = (sequelize, Types) =>
     name: {
       type: Types.STRING,
       allowNull: false
+    },
+    purpose: {
+      type: Types.STRING
+    },
+    accountability: {
+      type: Types.STRING
     }
   });
