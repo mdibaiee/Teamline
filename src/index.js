@@ -7,7 +7,7 @@ async function start(cfg = {}) {
 
   return new Promise(resolve => {
     server.start(() => {
-      console.log(`Task tracker server running at: ${server.info.uri}`);
+      console.log(`Teamline server running at: ${server.info.uri}`);
 
       sync(server.plugins['hapi-sequelize'].db, cfg);
 
