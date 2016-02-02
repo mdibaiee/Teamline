@@ -1,6 +1,6 @@
 module.exports = (sequelize, Types) =>
   sequelize.define('Recess', {
-    name: {
+    reason: {
       type: Types.STRING
     },
     description: {
@@ -33,6 +33,21 @@ module.exports = (sequelize, Types) =>
           end: {
             $gt: sequelize.fn('NOW')
           }
+        }
+      },
+      pending: {
+        where: {
+          status: 'pending'
+        }
+      },
+      accepted: {
+        where: {
+          status: 'accepted'
+        }
+      },
+      rejected: {
+        where: {
+          status: 'rejected'
         }
       }
     }
