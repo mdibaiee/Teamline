@@ -1,46 +1,32 @@
 export default ({
-  Company, Employee, Role, Team, OKR, Project, Action, Goal, Recess, WorkHour
+  Company, Employee, Role, Team, Project, Action, Goal, Recess, WorkHour
   }) => {
   // Employee <--> Role
   Employee.belongsToMany(Role, { through: 'EmployeeRoles' });
   Role.belongsToMany(Employee, { through: 'EmployeeRoles' });
 
+  // Team <--> Role
+  Team.belongsToMany(Role, { through: 'TeamRoles' });
+  Role.belongsToMany(Team, { through: 'TeamRoles' });
+
   // Employee <--> Team
   Employee.belongsToMany(Team, { through: 'EmployeeTeams' });
   Team.belongsToMany(Employee, { through: 'EmployeeTeams' });
+
+  // Employee <--> Project
+  Employee.belongsToMany(Project, { through: 'EmployeeProjects' });
+  Project.belongsToMany(Employee, { through: 'EmployeeProjects' });
+
+  Team.hasMany(Project);
+  Project.belongsTo(Team);
 
   // Employee --> Recess
   Employee.hasMany(Recess);
   Recess.belongsTo(Employee);
 
-  // Team --> Role
-  Team.hasMany(Role);
-  Role.belongsTo(Team);
-
-  // OKR --> OKR
-  // Sub-OKR of teams
-  OKR.hasMany(OKR);
-  OKR.belongsTo(OKR);
-
-  // OKR --> Project
-  OKR.hasMany(Project);
-  Project.belongsTo(OKR);
-
-  // Project --> Action
-  Project.hasMany(Action);
-  Action.belongsTo(Project);
-
   // Company --> Team
   Company.hasMany(Team);
   Team.belongsTo(Company);
-
-  // Company --> OKR
-  Company.hasMany(OKR);
-  OKR.belongsTo(Company);
-
-  // Team --> OKR (Sub-OKR)
-  Team.hasMany(OKR);
-  OKR.belongsTo(Team);
 
   // Team --> Goal
   Team.hasMany(Goal);
@@ -53,6 +39,14 @@ export default ({
   // Employee --> Action
   Employee.hasMany(Action);
   Action.belongsTo(Employee);
+
+  // Role --> Action
+  Role.hasMany(Action);
+  Action.belongsTo(Role);
+
+  // Project --> Action
+  Project.hasMany(Action);
+  Action.belongsTo(Project);
 
   // Employee --> WorkHour
   Employee.hasMany(WorkHour);
