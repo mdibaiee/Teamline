@@ -1,6 +1,6 @@
 module.exports = (sequelize, Types) =>
   sequelize.define('Recess', {
-    reason: {
+    name: {
       type: Types.STRING
     },
     description: {
