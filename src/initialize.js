@@ -72,7 +72,7 @@ export default async (config = {}) => {
 
   const db = server.plugins['hapi-sequelize'].db;
   const models = db.sequelize.models;
-  db.sequelize.sync();
+  await db.sequelize.sync();
 
   server.ext('onPreHandler', (function preHandler(modelCollections) {
     return function handler(request, reply) {
