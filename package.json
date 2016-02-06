@@ -1,6 +1,6 @@
 {
   "name": "teamline",
-  "version": "0.4.8",
+  "version": "0.5.8",
   "description": "",
   "main": "build/index.js",
   "scripts": {
@@ -44,6 +44,7 @@
     "good": "6.4.0",
     "good-file": "5.1.1",
     "hapi": "12.1.0",
+    "hapi-auth-bearer-token": "^4.0.0",
     "hapi-sequelize": "2.2.4",
     "hapi-sequelize-crud": "1.5.0",
     "lodash": "4.2.0",

@@ -2,6 +2,8 @@ import Hapi from 'hapi';
 import path from 'path';
 import Promise from 'bluebird';
 import relations from './relations';
+import auth from './auth';
+
 
 export default async (config = {}) => {
   // Config
@@ -24,6 +26,12 @@ export default async (config = {}) => {
 
     crud: {
       ...config.crud
+    },
+
+    auth: {
+      // default token (not safe at all!)
+      token: '123456',
+      ...config.auth
     }
   };
 
@@ -66,6 +74,8 @@ export default async (config = {}) => {
       register: require('hapi-sequelize-crud'),
       options: config.crud
     });
+
+    await auth(server, register, config);
   } catch (error) {
     return console.error('Error registering plugins!', error);
   }
@@ -80,6 +90,17 @@ export default async (config = {}) => {
       reply.continue();
     };
   }(models)));
+
+  server.route({
+    method: 'GET',
+    path: '/test/{yourname}',
+    config: {
+      auth: 'simple'
+    },
+    handler: (req, reply) => {
+      reply(`Hello ${req.params.yourname}!`);
+    }
+  });
 
   return server;
 };
