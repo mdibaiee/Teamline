@@ -7,9 +7,9 @@ module.exports = (sequelize, Types) =>
     description: {
       type: Types.STRING
     },
-    done: {
-      type: Types.BOOLEAN,
-      defaultValue: false
+    state: {
+      type: Types.ENUM('todo', 'doing', 'done'), // eslint-disable-line
+      defaultValue: 'todo'
     },
     date: {
       type: Types.DATE,
@@ -19,12 +19,24 @@ module.exports = (sequelize, Types) =>
     scopes: {
       done: {
         where: {
-          done: true
+          state: 'done'
+        }
+      },
+      doing: {
+        where: {
+          state: 'doing'
+        }
+      },
+      todo: {
+        where: {
+          state: 'todo'
         }
       },
       undone: {
         where: {
-          done: false
+          state: {
+            $ne: 'done'
+          }
         }
       }
     }
