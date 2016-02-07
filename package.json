@@ -1,6 +1,6 @@
 {
   "name": "teamline",
-  "version": "0.5.9",
+  "version": "0.5.10",
   "description": "",
   "main": "build/index.js",
   "scripts": {
@@ -46,7 +46,7 @@
     "hapi": "12.1.0",
     "hapi-auth-bearer-token": "^4.0.0",
     "hapi-sequelize": "2.2.4",
-    "hapi-sequelize-crud": "1.5.0",
+    "hapi-sequelize-crud": ">=1.5.0",
     "lodash": "4.2.0",
     "moment": "2.11.1",
     "mysql": "2.10.2",
