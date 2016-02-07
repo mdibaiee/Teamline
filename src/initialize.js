@@ -91,16 +91,5 @@ export default async (config = {}) => {
     };
   }(models)));
 
-  server.route({
-    method: 'GET',
-    path: '/test/{yourname}',
-    config: {
-      auth: 'simple'
-    },
-    handler: (req, reply) => {
-      reply(`Hello ${req.params.yourname}!`);
-    }
-  });
-
   return server;
 };

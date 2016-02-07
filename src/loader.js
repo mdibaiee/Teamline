@@ -9,11 +9,11 @@ const modules = fs.readdirSync(modulesPath)
   path.resolve(modulesPath, module)
 );
 
-export default (db, config) => {
+export default (server, db, config) => {
   for (const file of modules) {
     const rq = require(file);
 
-    if (typeof rq === 'function') rq(db, config);
-    else rq.default(db, config);
+    if (typeof rq === 'function') rq(server, db, config);
+    else rq.default(server, db, config);
   }
 };

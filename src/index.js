@@ -1,6 +1,6 @@
 import initialize from './initialize';
 import config from '../config';
-import sync from './sync';
+import loader from './loader';
 
 async function start(cfg = {}) {
   const server = await initialize(cfg);
@@ -9,7 +9,7 @@ async function start(cfg = {}) {
     server.start(() => {
       console.log(`Teamline server running at: ${server.info.uri}`);
 
-      sync(server.plugins['hapi-sequelize'].db, cfg);
+      loader(server, server.plugins['hapi-sequelize'].db, cfg);
 
       resolve(server);
     });
