@@ -3,7 +3,7 @@ import path from 'path';
 import Promise from 'bluebird';
 import relations from './relations';
 import auth from './auth';
-
+import routes from './routes';
 
 export default async (config = {}) => {
   // Config
@@ -76,6 +76,7 @@ export default async (config = {}) => {
     });
 
     await auth(server, register, config);
+    routes(server);
   } catch (error) {
     return console.error('Error registering plugins!', error);
   }
