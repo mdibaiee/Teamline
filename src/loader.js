@@ -13,7 +13,11 @@ export default (server, db, config) => {
   for (const file of modules) {
     const rq = require(file);
 
-    if (typeof rq === 'function') rq(server, db, config);
-    else rq.default(server, db, config);
+    try {
+      if (typeof rq === 'function') rq(server, db, config);
+      else rq.default(server, db, config);
+    } catch (e) {
+      console.error('Teamline plugin error', e);
+    }
   }
 };
