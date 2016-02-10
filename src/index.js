@@ -1,3 +1,4 @@
+import 'babel/polyfill';
 import initialize from './initialize';
 import config from '../config';
 import loader from './loader';
@@ -16,6 +17,6 @@ async function start(cfg = {}) {
   });
 }
 
-if (Object.keys(config).length) start(config);
+start(config);
 
 export default start;
