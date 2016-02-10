@@ -8,7 +8,7 @@ module.exports = (sequelize, Types) =>
       type: Types.STRING
     },
     state: {
-      type: Types.ENUM('todo', 'doing', 'done'), // eslint-disable-line
+      type: Types.ENUM('todo', 'doing', 'done', 'closed'), // eslint-disable-line
       defaultValue: 'todo'
     },
     date: {
@@ -17,6 +17,18 @@ module.exports = (sequelize, Types) =>
     }
   }, {
     scopes: {
+      open: {
+        where: {
+          state: {
+            $ne: 'closed'
+          }
+        }
+      },
+      closed: {
+        where: {
+          state: 'closed'
+        }
+      },
       done: {
         where: {
           state: 'done'
@@ -35,7 +47,7 @@ module.exports = (sequelize, Types) =>
       undone: {
         where: {
           state: {
-            $ne: 'done'
+            $notIn: ['done', 'closed']
           }
         }
       }
