@@ -1,10 +1,7 @@
 module.exports = (sequelize, Types) =>
-  sequelize.define('Recess', {
-    name: {
+  sequelize.define('Break', {
+    reason: {
       type: Types.STRING
-    },
-    description: {
-      type: Types.TEXT
     },
     start: {
       type: Types.DATE,

@@ -1,7 +1,9 @@
 module.exports = (sequelize, Types) =>
   sequelize.define('WorkHour', {
     weekday: {
-      type: Types.ENUM('sat', 'sun', 'mon', 'tue', 'wed', 'thu', 'fri'), // eslint-disable-line
+      type: Types.INTEGER,
+      min: 0,
+      max: 6,
       allowNull: false
     },
     start: {
