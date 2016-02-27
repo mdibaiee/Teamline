@@ -5,13 +5,5 @@ module.exports = (sequelize, Types) =>
       min: 0,
       max: 6,
       allowNull: false
-    },
-    start: {
-      type: Types.TIME,
-      allowNull: false
-    },
-    end: {
-      type: Types.TIME,
-      allowNull: false
     }
   });

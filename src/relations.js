@@ -1,5 +1,5 @@
 export default ({
-  Company, Employee, Role, Team, Project, Action, Goal, Break, WorkHour
+  Company, Employee, Role, Team, Project, Action, Goal, Break, WorkHour, Timerange
   }) => {
   // Employee <--> Role
   Employee.belongsToMany(Role, { through: 'EmployeeRoles' });
@@ -51,4 +51,8 @@ export default ({
   // Employee --> WorkHour
   Employee.hasMany(WorkHour);
   WorkHour.belongsTo(Employee);
+
+  // WorkHour --> Timerange
+  WorkHour.hasMany(Timerange);
+  Timerange.belongsTo(WorkHour);
 };
