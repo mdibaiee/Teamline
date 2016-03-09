@@ -1,5 +1,9 @@
 module.exports = (sequelize, Types) =>
-  sequelize.define('Break', {
+  sequelize.define('ScheduleModification', {
+    type: {
+      type: Types.ENUM('sub', 'add'), // eslint-disable-line
+      allowNull: false
+    },
     reason: {
       type: Types.STRING
     },
@@ -45,6 +49,16 @@ module.exports = (sequelize, Types) =>
       rejected: {
         where: {
           status: 'rejected'
+        }
+      },
+      add: {
+        where: {
+          type: 'add'
+        }
+      },
+      sub: {
+        where: {
+          type: 'sub'
         }
       }
     }

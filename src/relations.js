@@ -1,5 +1,5 @@
 export default ({
-  Company, Employee, Role, Team, Project, Action, Goal, Break, WorkHour, Timerange
+  Company, Employee, Role, Team, Project, Action, Goal, ScheduleModification, WorkHour, Timerange
   }) => {
   // Employee <--> Role
   Employee.belongsToMany(Role, { through: 'EmployeeRoles' });
@@ -8,6 +8,9 @@ export default ({
   // Team <--> Role
   Team.belongsToMany(Role, { through: 'TeamRoles' });
   Role.belongsToMany(Team, { through: 'TeamRoles' });
+
+  Team.hasOne(Employee, { as: 'Manager' });
+  Employee.belongsTo(Team);
 
   // Employee <--> Team
   Employee.belongsToMany(Team, { through: 'EmployeeTeams' });
@@ -20,9 +23,9 @@ export default ({
   Team.hasMany(Project);
   Project.belongsTo(Team);
 
-  // Employee --> Break
-  Employee.hasMany(Break);
-  Break.belongsTo(Employee);
+  // Employee --> ScheduleModification
+  Employee.hasMany(ScheduleModification);
+  ScheduleModification.belongsTo(Employee);
 
   // Company --> Team
   Company.hasMany(Team);
