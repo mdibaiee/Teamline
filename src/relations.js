@@ -9,12 +9,13 @@ export default ({
   Team.belongsToMany(Role, { through: 'TeamRoles' });
   Role.belongsToMany(Team, { through: 'TeamRoles' });
 
-  Team.hasOne(Employee, { as: 'Manager' });
-  Employee.belongsTo(Team);
-
   // Employee <--> Team
-  Employee.belongsToMany(Team, { through: 'EmployeeTeams' });
-  Team.belongsToMany(Employee, { through: 'EmployeeTeams' });
+  Employee.belongsToMany(Team, { through: 'EmployeeTeams', as: 'Teams' });
+  Team.belongsToMany(Employee, { through: 'EmployeeTeams', as: 'Employees' });
+
+  // Employee (Admin) <--> Team
+  Employee.belongsToMany(Team, { through: 'TeamAdmins', as: 'ManagedTeams', foreignKey: 'ManagerId' }); // eslint-disable-line
+  Team.belongsToMany(Employee, { through: 'TeamAdmins', as: 'Managers', foreignKey: 'TeamId' });
 
   // Employee <--> Project
   Employee.belongsToMany(Project, { through: 'EmployeeProjects' });
