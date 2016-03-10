@@ -10,8 +10,8 @@ export default ({
   Role.belongsToMany(Team, { through: 'TeamRoles' });
 
   // Employee <--> Team
-  Employee.belongsToMany(Team, { through: 'EmployeeTeams', as: 'Teams' });
-  Team.belongsToMany(Employee, { through: 'EmployeeTeams', as: 'Employees' });
+  Employee.belongsToMany(Team, { through: 'EmployeeTeams' });
+  Team.belongsToMany(Employee, { through: 'EmployeeTeams' });
 
   // Employee (Admin) <--> Team
   Employee.belongsToMany(Team, { through: 'TeamAdmins', as: 'ManagedTeams', foreignKey: 'ManagerId' }); // eslint-disable-line
