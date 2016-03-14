@@ -4,10 +4,24 @@ module.exports = (sequelize, Types) =>
       type: Types.STRING,
       allowNull: false
     },
-    purpose: {
+    description: {
       type: Types.STRING
     },
-    accountability: {
-      type: Types.STRING
+    closed: {
+      type: Types.BOOLEAN,
+      defaultValue: false
+    }
+  }, {
+    scopes: {
+      open: {
+        where: {
+          closed: false
+        }
+      },
+      closed: {
+        where: {
+          closed: true
+        }
+      }
     }
   });
