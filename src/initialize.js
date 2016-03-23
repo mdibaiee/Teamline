@@ -30,7 +30,8 @@ export default async (config = {}) => {
 
     auth: {
       // default token (not safe at all!)
-      token: '123456',
+      key: 'access_token',
+      value: '918273645',
       ...config.auth
     }
   };

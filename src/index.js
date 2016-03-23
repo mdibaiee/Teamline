@@ -1,4 +1,6 @@
-import 'babel/polyfill';
+if (!global._babelPolyfill) {
+  require('babel/polyfill');
+}
 import initialize from './initialize';
 import config from '../config';
 import loader from './loader';
@@ -8,15 +10,16 @@ async function start(cfg = {}) {
 
   return new Promise(resolve => {
     server.start(() => {
-      console.log(`Teamline server running at: ${server.info.uri}`);
+      if (!module.parent) console.log(`Teamline server running at: ${server.info.uri}`);
+      const { db } = server.plugins['hapi-sequelize'];
 
-      loader(server, server.plugins['hapi-sequelize'].db, cfg);
+      loader(server, db, cfg);
 
-      resolve(server);
+      resolve({ server, db });
     });
   });
 }
 
-start(config);
+if (!module.parent) start(config);
 
 export default start;
