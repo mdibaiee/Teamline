@@ -5,7 +5,7 @@ import initialize from './initialize';
 import config from '../config';
 import loader from './loader';
 
-async function start(cfg = {}) {
+async function start(cfg = config) {
   const server = await initialize(cfg);
 
   return new Promise(resolve => {
