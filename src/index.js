@@ -15,7 +15,11 @@ async function start(cfg = config) {
 
       loader(server, db, cfg);
 
-      resolve({ server, db });
+      resolve({ server, db,
+        destroy() {
+          server.stop();
+        }
+      });
     });
   });
 }

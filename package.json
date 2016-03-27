@@ -1,6 +1,6 @@
 {
   "name": "teamline",
-  "version": "0.9.6",
+  "version": "0.9.7",
   "description": "",
   "main": "build/index.js",
   "scripts": {
@@ -50,7 +50,7 @@
     "moment": "2.11.1",
     "mysql": "2.10.2",
     "poop": "2.0.0",
-    "sequelize": "3.17.3",
+    "sequelize": "3.20.0",
     "toothache": "2.0.0"
   },
   "devDependencies": {
