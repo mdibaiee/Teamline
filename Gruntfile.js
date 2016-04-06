@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
   grunt.initConfig({
     babel: {
       scripts: {
@@ -10,9 +10,9 @@ module.exports = function(grunt) {
         }]
       }
     },
-		clean: {
-			files: ['build/**/*.js']
-		},
+    clean: {
+      files: ['build/**/*.js']
+    },
     watch: {
       scripts: {
         files: ['src/**/*.js', 'server/**/*.js'],
@@ -22,7 +22,7 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-babel');
-	grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('default', ['clean', 'babel']);

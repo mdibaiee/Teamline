@@ -1,6 +1,6 @@
 {
   "name": "teamline",
-  "version": "0.9.7",
+  "version": "0.9.8",
   "description": "",
   "main": "build/index.js",
   "scripts": {
