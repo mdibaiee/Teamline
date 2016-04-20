@@ -21,7 +21,7 @@ module.exports = (sequelize, Types) =>
     }
   }, {
     instanceMethods: {
-      timeLeft() {
+      duration() {
         return new Date(this.end - this.start);
       }
     },
