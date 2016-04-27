@@ -18,6 +18,10 @@ module.exports = (sequelize, Types) =>
     status: {
       type: Types.ENUM('pending', 'accepted', 'rejected'), // eslint-disable-line
       defaultValue: 'pending'
+    },
+    shift: {
+      type: Types.BOOLEAN,
+      defaultValue: false
     }
   }, {
     instanceMethods: {
