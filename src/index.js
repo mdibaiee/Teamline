@@ -18,7 +18,7 @@ async function start(cfg = config) {
       resolve({ server, db,
         destroy() {
           server.stop();
-        }
+        },
       });
     });
   });

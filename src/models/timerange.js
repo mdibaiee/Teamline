@@ -2,10 +2,10 @@ module.exports = (sequelize, Types) =>
   sequelize.define('Timerange', {
     start: {
       type: Types.TIME,
-      allowNull: false
+      allowNull: false,
     },
     end: {
       type: Types.TIME,
-      allowNull: false
-    }
+      allowNull: false,
+    },
   });

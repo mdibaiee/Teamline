@@ -4,6 +4,6 @@ module.exports = (sequelize, Types) =>
       type: Types.INTEGER,
       min: 0,
       max: 6,
-      allowNull: false
-    }
+      allowNull: false,
+    },
   });

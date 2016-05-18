@@ -2,47 +2,47 @@ module.exports = (sequelize, Types) =>
   sequelize.define('Goal', {
     name: {
       type: Types.STRING,
-      allowNull: false
+      allowNull: false,
     },
     description: {
-      type: Types.STRING
+      type: Types.STRING,
     },
     done: {
       type: Types.BOOLEAN,
-      defaultValue: false
+      defaultValue: false,
     },
     date: {
       type: Types.DATE,
-      defaultValue: Types.NOW
+      defaultValue: Types.NOW,
     },
     deadline: {
-      type: Types.DATE
-    }
+      type: Types.DATE,
+    },
   }, {
     scopes: {
       done: {
         where: {
-          done: true
-        }
+          done: true,
+        },
       },
       undone: {
         where: {
-          done: false
-        }
+          done: false,
+        },
       },
       deadline_reached: {
         where: {
           deadline: {
-            $lt: sequelize.fn('NOW')
-          }
-        }
+            $lt: sequelize.fn('NOW'),
+          },
+        },
       },
       deadline_not_reached: {
         where: {
           deadline: {
-            $gt: sequelize.fn('NOW')
-          }
-        }
-      }
-    }
+            $gt: sequelize.fn('NOW'),
+          },
+        },
+      },
+    },
   });

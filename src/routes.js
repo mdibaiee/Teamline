@@ -7,6 +7,6 @@ export default (server) => {
         server.emit('refresh');
         reply();
       }
-    }
+    },
   });
 };

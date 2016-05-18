@@ -2,30 +2,30 @@ module.exports = (sequelize, Types) =>
   sequelize.define('Action', {
     name: {
       type: Types.STRING,
-      allowNull: false
+      allowNull: false,
     },
     description: {
-      type: Types.STRING
+      type: Types.STRING,
     },
     done: {
       type: Types.BOOLEAN,
-      defaultValue: false
+      defaultValue: false,
     },
     date: {
       type: Types.DATE,
-      defaultValue: Types.NOW
-    }
+      defaultValue: Types.NOW,
+    },
   }, {
     scopes: {
       done: {
         where: {
-          done: true
-        }
+          done: true,
+        },
       },
       undone: {
         where: {
-          done: false
-        }
+          done: false,
+        },
       },
       today: {
         where: {
@@ -33,25 +33,25 @@ module.exports = (sequelize, Types) =>
             $gt: sequelize.fn('CURDATE'),
             $lt: sequelize.fn('DATE_ADD',
                               sequelize.fn('CURDATE'),
-                              sequelize.literal('INTERVAL 1 DAY'))
-          }
-        }
+                              sequelize.literal('INTERVAL 1 DAY')),
+          },
+        },
       },
       past: {
         where: {
           date: {
-            $lt: sequelize.fn('CURDATE')
-          }
-        }
+            $lt: sequelize.fn('CURDATE'),
+          },
+        },
       },
       future: {
         where: {
           date: {
             $gt: sequelize.fn('DATE_ADD',
                               sequelize.fn('CURDATE'),
-                              sequelize.literal('INTERVAL 1 DAY'))
-          }
-        }
-      }
-    }
+                              sequelize.literal('INTERVAL 1 DAY')),
+          },
+        },
+      },
+    },
   });

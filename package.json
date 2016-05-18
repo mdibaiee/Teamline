@@ -1,9 +1,11 @@
 {
   "name": "teamline",
-  "version": "0.9.12",
+  "version": "0.9.13",
   "description": "",
   "main": "build/index.js",
   "scripts": {
+    "lint": "eslint src test",
+    "lint-fix": "eslint src test --fix",
     "start": "node build/index",
     "lint": "eslint src"
   },
@@ -55,10 +57,9 @@
   },
   "devDependencies": {
     "babel": "5.8.3",
-    "babel-eslint": "4.1.8",
     "chai": "3.5.0",
-    "eslint": "^1.10.3",
-    "eslint-config-airbnb": "^4.0.0",
+    "eslint": "2.10.2",
+    "eslint-config-pichak": "1.0.0",
     "express": "4.13.4",
     "ghooks": "1.0.3",
     "grunt": "0.4.5",

@@ -2,54 +2,54 @@ module.exports = (sequelize, Types) =>
   sequelize.define('Project', {
     name: {
       type: Types.STRING,
-      allowNull: false
+      allowNull: false,
     },
     description: {
-      type: Types.STRING
+      type: Types.STRING,
     },
     state: {
       type: Types.ENUM('todo', 'doing', 'done', 'closed'), // eslint-disable-line
-      defaultValue: 'todo'
+      defaultValue: 'todo',
     },
     date: {
       type: Types.DATE,
-      defaultValue: Types.NOW
-    }
+      defaultValue: Types.NOW,
+    },
   }, {
     scopes: {
       open: {
         where: {
           state: {
-            $ne: 'closed'
-          }
-        }
+            $ne: 'closed',
+          },
+        },
       },
       closed: {
         where: {
-          state: 'closed'
-        }
+          state: 'closed',
+        },
       },
       done: {
         where: {
-          state: 'done'
-        }
+          state: 'done',
+        },
       },
       doing: {
         where: {
-          state: 'doing'
-        }
+          state: 'doing',
+        },
       },
       todo: {
         where: {
-          state: 'todo'
-        }
+          state: 'todo',
+        },
       },
       undone: {
         where: {
           state: {
-            $notIn: ['done', 'closed']
-          }
-        }
-      }
-    }
+            $notIn: ['done', 'closed'],
+          },
+        },
+      },
+    },
   });

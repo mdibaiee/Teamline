@@ -5,7 +5,7 @@ export default async (server, register, config, useDefault = true) => {
   server.auth.strategy('simple', 'bearer-access-token', {
     validateFunc(token, callback) {
       return callback(null, token === config.auth.token, { token });
-    }
+    },
   });
   if (useDefault) {
     server.auth.default('simple');

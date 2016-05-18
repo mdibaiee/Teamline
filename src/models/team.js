@@ -2,23 +2,23 @@ module.exports = (sequelize, Types) =>
   sequelize.define('Team', {
     name: {
       type: Types.STRING,
-      allowNull: false
+      allowNull: false,
     },
     closed: {
       type: Types.BOOLEAN,
-      defaultValue: false
-    }
+      defaultValue: false,
+    },
   }, {
     scopes: {
       open: {
         where: {
-          closed: false
-        }
+          closed: false,
+        },
       },
       closed: {
         where: {
-          closed: true
-        }
-      }
-    }
+          closed: true,
+        },
+      },
+    },
   });

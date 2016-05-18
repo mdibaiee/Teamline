@@ -1,5 +1,5 @@
 export default ({
-  Company, Employee, Role, Team, Project, Action, Goal, ScheduleModification, WorkHour, Timerange
+  Company, Employee, Role, Team, Project, Action, Goal, ScheduleModification, WorkHour, Timerange,
   }) => {
   // Employee <--> Role
   Employee.belongsToMany(Role, { through: 'EmployeeRoles' });

@@ -14,35 +14,35 @@ export default async (config = {}) => {
       database: 'teamline',
       models: path.relative(process.cwd(), path.join(__dirname, './models/**/*.js')),
 
-      ...config.database
+      ...config.database,
     },
 
     server: {
       host: '127.0.0.1',
       port: 8080,
 
-      ...config.server
+      ...config.server,
     },
 
     crud: {
-      ...config.crud
+      ...config.crud,
     },
 
     auth: {
       // default token (not safe at all!)
       key: 'access_token',
       value: '918273645',
-      ...config.auth
-    }
+      ...config.auth,
+    },
   };
 
   // Create connection
   const server = new Hapi.Server({
     connections: {
       router: {
-        stripTrailingSlash: true
-      }
-    }
+        stripTrailingSlash: true,
+      },
+    },
   });
   server.connection(config.server);
 
@@ -56,14 +56,14 @@ export default async (config = {}) => {
         reporters: [{
           reporter: require('good-file'),
           config: path.join(__dirname, '../../hapi.log'),
-          events: { ops: '*', response: '*', error: '*', request: '*' }
-        }]
-      }
+          events: { ops: '*', response: '*', error: '*', request: '*' },
+        }],
+      },
     });
 
     await register({
       register: require('hapi-sequelize'),
-      options: config.database
+      options: config.database,
     });
 
     const db = server.plugins['hapi-sequelize'].db;
@@ -73,7 +73,7 @@ export default async (config = {}) => {
 
     await register({
       register: require('hapi-sequelize-crud'),
-      options: config.crud
+      options: config.crud,
     });
 
     await auth(server, register, config);

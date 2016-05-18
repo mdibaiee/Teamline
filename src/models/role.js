@@ -2,26 +2,26 @@ module.exports = (sequelize, Types) =>
   sequelize.define('Role', {
     name: {
       type: Types.STRING,
-      allowNull: false
+      allowNull: false,
     },
     description: {
-      type: Types.STRING
+      type: Types.STRING,
     },
     closed: {
       type: Types.BOOLEAN,
-      defaultValue: false
-    }
+      defaultValue: false,
+    },
   }, {
     scopes: {
       open: {
         where: {
-          closed: false
-        }
+          closed: false,
+        },
       },
       closed: {
         where: {
-          closed: true
-        }
-      }
-    }
+          closed: true,
+        },
+      },
+    },
   });

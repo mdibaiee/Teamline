@@ -2,68 +2,68 @@ module.exports = (sequelize, Types) =>
   sequelize.define('ScheduleModification', {
     type: {
       type: Types.ENUM('sub', 'add'), // eslint-disable-line
-      allowNull: false
+      allowNull: false,
     },
     reason: {
-      type: Types.STRING
+      type: Types.STRING,
     },
     start: {
       type: Types.DATE,
-      defaultValue: Types.NOW
+      defaultValue: Types.NOW,
     },
     end: {
       type: Types.DATE,
-      allowNull: false
+      allowNull: false,
     },
     status: {
       type: Types.ENUM('pending', 'accepted', 'rejected'), // eslint-disable-line
-      defaultValue: 'pending'
+      defaultValue: 'pending',
     },
     shift: {
       type: Types.BOOLEAN,
-      defaultValue: false
-    }
+      defaultValue: false,
+    },
   }, {
     instanceMethods: {
       duration() {
         return new Date(this.end - this.start);
-      }
+      },
     },
     scopes: {
       active: {
         where: {
           start: {
-            $lt: sequelize.fn('NOW')
+            $lt: sequelize.fn('NOW'),
           },
           end: {
-            $gt: sequelize.fn('NOW')
-          }
-        }
+            $gt: sequelize.fn('NOW'),
+          },
+        },
       },
       pending: {
         where: {
-          status: 'pending'
-        }
+          status: 'pending',
+        },
       },
       accepted: {
         where: {
-          status: 'accepted'
-        }
+          status: 'accepted',
+        },
       },
       rejected: {
         where: {
-          status: 'rejected'
-        }
+          status: 'rejected',
+        },
       },
       add: {
         where: {
-          type: 'add'
-        }
+          type: 'add',
+        },
       },
       sub: {
         where: {
-          type: 'sub'
-        }
-      }
-    }
+          type: 'sub',
+        },
+      },
+    },
   });

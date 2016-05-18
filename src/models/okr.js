@@ -2,30 +2,30 @@ module.exports = (sequelize, Types) =>
   sequelize.define('OKR', {
     name: {
       type: Types.STRING,
-      allowNull: false
+      allowNull: false,
     },
     description: {
-      type: Types.STRING
+      type: Types.STRING,
     },
     done: {
       type: Types.BOOLEAN,
-      defaultValue: false
+      defaultValue: false,
     },
     date: {
       type: Types.DATE,
-      defaultValue: Types.NOW
-    }
+      defaultValue: Types.NOW,
+    },
   }, {
     scopes: {
       done: {
         where: {
-          done: true
-        }
+          done: true,
+        },
       },
       undone: {
         where: {
-          done: false
-        }
-      }
-    }
+          done: false,
+        },
+      },
+    },
   });
