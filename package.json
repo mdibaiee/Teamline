@@ -1,13 +1,12 @@
 {
   "name": "teamline",
-  "version": "0.9.13",
+  "version": "0.9.14",
   "description": "",
   "main": "build/index.js",
   "scripts": {
-    "lint": "eslint src test",
+    "lint": "eslint src",
     "lint-fix": "eslint src test --fix",
-    "start": "node build/index",
-    "lint": "eslint src"
+    "start": "node build/index"
   },
   "config": {
     "ghooks": {

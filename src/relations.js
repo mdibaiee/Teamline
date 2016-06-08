@@ -21,6 +21,13 @@ export default ({
   Employee.belongsToMany(Project, { through: 'EmployeeProjects' });
   Project.belongsToMany(Employee, { through: 'EmployeeProjects' });
 
+  // Employee <--> Goal
+  Employee.belongsToMany(Goal, { through: 'EmployeeGoals' });
+  Goal.belongsToMany(Employee, { through: 'EmployeeGoals' });
+
+  // Employee (Owner) <--> Goal
+  Goal.belongsTo(Employee, { as: 'Owner', foreignKey: 'OwnerId' });
+
   Team.hasMany(Project);
   Project.belongsTo(Team);
 
